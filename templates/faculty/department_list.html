@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Кафедри — ФПрН НаУКМА{% endblock %}
+{% block content %}
+<h1 class="page-title">Кафедри</h1>
+<div class="list">
+  {% for department in departments %}
+  <article class="card item">
+    <h2><a href="{{ department.get_absolute_url }}">{{ department.name }}</a></h2>
+    <p class="meta"><span><b>Завідувач:</b> {{ department.head }}</span></p>
+    {% if department.programs.all %}
+    <p class="label">Випускова для спеціальностей:</p>
+    <ul class="pills">
+      {% for program in department.programs.all %}
+      <li><a href="{{ program.get_absolute_url }}">{{ program.code }} {{ program.name }}</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="muted">Не є випусковою для бакалаврських спеціальностей.</p>
+    {% endif %}
+  </article>
+  {% empty %}
+  <p class="muted">Кафедр поки немає.</p>
+  {% endfor %}
+</div>
+{% endblock %}

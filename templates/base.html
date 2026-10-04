@@ -1,0 +1,39 @@
+{% load static %}<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Факультет природничих наук НаУКМА{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{% url 'home' %}">
+        <span class="brand-mark">ФПрН</span>
+        <span class="brand-text">Факультет природничих наук<small>НаУКМА</small></span>
+      </a>
+      {% with name=request.resolver_match.url_name %}
+      <nav class="nav">
+        <a href="{% url 'home' %}" class="{% if name == 'home' %}active{% endif %}">Головна</a>
+        <a href="{% url 'department_list' %}" class="{% if 'department' in name %}active{% endif %}">Кафедри</a>
+        <a href="{% url 'program_list' %}" class="{% if 'program' in name %}active{% endif %}">Спеціальності</a>
+        {% block extra_nav %}{% endblock %}
+      </nav>
+      {% endwith %}
+    </div>
+  </header>
+
+  <main class="container main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {% now "Y" %} Факультет природничих наук, Національний університет «Києво-Могилянська академія»</p>
+    </div>
+  </footer>
+</body>
+</html>
