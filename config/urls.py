@@ -6,5 +6,6 @@ admin.site.site_title = "ФПрН НаУКМА"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("exchange/", include("exchange.urls")),
     path("", include("faculty.urls")),
 ]

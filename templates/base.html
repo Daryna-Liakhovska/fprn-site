@@ -20,7 +20,7 @@
         <a href="{% url 'home' %}" class="{% if name == 'home' %}active{% endif %}">Головна</a>
         <a href="{% url 'department_list' %}" class="{% if 'department' in name %}active{% endif %}">Кафедри</a>
         <a href="{% url 'program_list' %}" class="{% if 'program' in name %}active{% endif %}">Спеціальності</a>
-        {% block extra_nav %}{% endblock %}
+        <a href="{% url 'exchange_list' %}" class="{% if 'exchange' in name %}active{% endif %}">Обмін</a>
       </nav>
       {% endwith %}
     </div>

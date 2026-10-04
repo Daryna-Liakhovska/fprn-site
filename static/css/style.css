@@ -79,6 +79,7 @@ h2 { font-size: 1.2rem; }
 .page-title { font-size: 2rem; margin-bottom: .5em; }
 .section-title { font-family: "Lora", Georgia, serif; font-size: 1.5rem; margin: 8px 0 16px; }
 .crumbs { margin: 0 0 8px; font-size: .95rem; }
+.page-meta { margin-bottom: 20px; }
 .label { font-weight: 600; margin: 10px 0 6px; font-size: .95rem; }
 
 .contacts dl { margin: 0; }
@@ -135,4 +136,5 @@ tbody tr:hover { background: var(--bg); }
   .page-title { font-size: 1.6rem; }
   .container { padding: 0 16px; }
   .header-inner { padding: 10px 0; }
+  .site-header { position: static; }
 }

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Академічний обмін — ФПрН НаУКМА{% endblock %}
+{% block content %}
+<h1 class="page-title">Програми академічного обміну</h1>
+<p class="muted">Студенти факультету можуть провести семестр в університеті-партнері. Статус прийому оновлюється автоматично за дедлайном.</p>
+
+{% if countries %}
+<nav class="filters" aria-label="Фільтр за країною">
+  <a href="{% url 'exchange_list' %}" class="{% if not selected %}active{% endif %}">Усі країни</a>
+  {% for c in countries %}
+  <a href="?country={{ c|urlencode }}" class="{% if c == selected %}active{% endif %}">{{ c }}</a>
+  {% endfor %}
+</nav>
+{% endif %}
+
+<div class="list">
+  {% for p in programs %}
+  <article class="card item">
+    <div class="item-head" style="justify-content: space-between; flex-wrap: wrap;">
+      <h2>{{ p.university }}{% if p.country %} <span class="muted" style="font-weight:500">· {{ p.country }}</span>{% endif %}</h2>
+      {% if p.is_open %}
+        <span class="badge badge-open">Прийом триває</span>
+      {% else %}
+        <span class="badge badge-closed">Прийом завершено</span>
+      {% endif %}
+    </div>
+    <p>{{ p.description }}</p>
+    <p class="meta">
+      <span><b>Мови навчання:</b> {{ p.languages }}</span>
+      <span><b>Місць:</b> {{ p.seats_display }}</span>
+      <span><b>Дедлайн:</b> {{ p.deadline|date:"d.m.Y" }}</span>
+    </p>
+  </article>
+  {% empty %}
+  <p class="muted">Програм обміну поки немає.</p>
+  {% endfor %}
+</div>
+{% endblock %}

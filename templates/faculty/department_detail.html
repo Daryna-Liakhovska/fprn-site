@@ -3,7 +3,7 @@
 {% block content %}
 <p class="crumbs"><a href="{% url 'department_list' %}">← Усі кафедри</a></p>
 <h1 class="page-title">{{ department.name }}</h1>
-<p class="meta"><span><b>Завідувач кафедри:</b> {{ department.head }}</span></p>
+<p class="meta page-meta"><span><b>Завідувач кафедри:</b> {{ department.head }}</span></p>
 
 {% if department.programs.all %}
 <section class="card">
