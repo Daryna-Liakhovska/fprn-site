@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{% if page %}
+<section class="hero">
+  <h1>{{ page.title }}</h1>
+  {% if page.tagline %}<p class="lead">{{ page.tagline }}</p>{% endif %}
+  <div class="hero-actions">
+    <a class="btn" href="{% url 'program_list' %}">Спеціальності</a>
+    <a class="btn btn-ghost" href="{% url 'department_list' %}">Кафедри</a>
+  </div>
+</section>
+
+<div class="grid-2">
+  <section class="card">
+    <h2>Про факультет</h2>
+    <div class="prose">{{ page.about|linebreaks }}</div>
+  </section>
+
+  <aside class="card contacts">
+    <h2>Контакти</h2>
+    <dl>
+      {% if page.dean %}<dt>Декан</dt><dd>{{ page.dean }}</dd>{% endif %}
+      {% if page.address %}<dt>Адреса</dt><dd>{{ page.address }}</dd>{% endif %}
+      {% if page.phone %}<dt>Телефон</dt><dd>{{ page.phone }}</dd>{% endif %}
+      {% if page.email %}<dt>Email</dt><dd><a href="mailto:{{ page.email }}">{{ page.email }}</a></dd>{% endif %}
+    </dl>
+  </aside>
+</div>
+{% else %}
+<section class="hero"><h1>Факультет природничих наук</h1><p class="lead">Текст головної сторінки ще не заповнено в адмінці.</p></section>
+{% endif %}
+
+<section>
+  <h2 class="section-title">Освітні програми</h2>
+  <div class="tiles">
+    {% for program in programs %}
+    <a class="tile" href="{{ program.get_absolute_url }}">
+      <span class="code">{{ program.code }}</span>
+      <strong>{{ program.name }}</strong>
+      <span class="muted">{{ program.department.name }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

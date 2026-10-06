@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ department.name }} — ФПрН НаУКМА{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{% url 'department_list' %}">← Усі кафедри</a></p>
+<h1 class="page-title">{{ department.name }}</h1>
+<p class="meta page-meta"><span><b>Завідувач кафедри:</b> {{ department.head }}</span></p>
+
+{% if department.programs.all %}
+<section class="card">
+  <h2>Випускова для спеціальностей</h2>
+  <ul class="pills">
+    {% for program in department.programs.all %}
+    <li><a href="{{ program.get_absolute_url }}">{{ program.code }} {{ program.name }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<section class="card">
+  <h2>Викладачі</h2>
+  {% if department.teachers.all %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Ім'я</th><th>Посада</th><th>Науковий ступінь</th></tr></thead>
+      <tbody>
+        {% for t in department.teachers.all %}
+        <tr><td>{{ t.name }}</td><td>{{ t.position }}</td><td>{{ t.degree|default:"—" }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="muted">Список викладачів ще не заповнено.</p>
+  {% endif %}
+</section>
+{% endblock %}

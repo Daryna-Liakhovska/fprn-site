@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ program.name }} — ФПрН НаУКМА{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{% url 'program_list' %}">← Усі спеціальності</a></p>
+<h1 class="page-title"><span class="code">{{ program.code }}</span> {{ program.name }}</h1>
+
+<div class="grid-2">
+  <section class="card">
+    <h2>Опис</h2>
+    <div class="prose">{{ program.description|linebreaks }}</div>
+    {% with disciplines=program.discipline_list %}
+    {% if disciplines %}
+    <h2>Дисципліни</h2>
+    <ul class="pills">
+      {% for d in disciplines %}<li>{{ d }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </section>
+  <aside class="card contacts">
+    <h2>Інформація</h2>
+    <dl>
+      <dt>Код</dt><dd>{{ program.code }}</dd>
+      <dt>Випускова кафедра</dt><dd><a href="{{ program.department.get_absolute_url }}">{{ program.department.name }}</a></dd>
+      <dt>Координатор набору</dt><dd>{{ program.coordinator_name }}</dd>
+      <dt>Контакт координатора</dt><dd>{{ program.coordinator_contact }}</dd>
+    </dl>
+  </aside>
+</div>
+{% endblock %}
